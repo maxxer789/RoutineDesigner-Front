@@ -7,13 +7,6 @@ export default class FetchApparatus extends React.Component
     apparatus: null,
   };
 
-  async componentDidMount(){
-    const url = "http://localhost:5000/api/apparatus/all";
-    const respone = await fetch(url);
-    const data = await respone.json();
-    this.setState({apparatus: data[0], loading: false});
-    console.log(data);
-  }
 
   render(){
     return this.state.loading || !this.state.apparatus ? 
