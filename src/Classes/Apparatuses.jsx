@@ -2,43 +2,42 @@ import React, { Component } from 'react';
 import Apparatus from "./Apparatus"
 
 class Apparatuses extends Component {
-    state = { 
+    state = {
         loading: true,
-        apparatuses:[
+        apparatuses: [
             { id: 0, name: "", abbreviation: "" },
             { id: 0, name: "", abbreviation: "" },
             { id: 0, name: "", abbreviation: "" },
             { id: 0, name: "", abbreviation: "" },
             { id: 0, name: "", abbreviation: "" },
         ]
-     }
-     
-  async componentDidMount(){
-    const url = "http://localhost:5000/api/apparatus/all";
-    await fetch(url)
-    .then(res => res.json())
-    .then(json =>{
-        console.log("json", json)
-        this.setState({
-            loading: false,
-            apparatuses: json
-        });
-    })
-  }
+    }
 
-    render() { 
-        return ( this.state.loading || !this.state.apparatuses ? 
+    async componentDidMount() {
+        const url = "http://localhost:5000/api/apparatus/all";
+        await fetch(url)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    loading: false,
+                    apparatuses: json
+                });
+            })
+    }
+
+    render() {
+        return (this.state.loading || !this.state.apparatuses ?
             (
-                <div>Loading...</div> 
-            ):(
+                <div>Loading...</div>
+            ) : (
                 <div>
                     {this.state.apparatuses.map(apparatus => (
-                        <Apparatus key={apparatus.id} name={apparatus.name} abbreviation={apparatus.abbreviation} />
+                        <Apparatus key={apparatus.id} apparatus = {apparatus} />
                     ))}
-                </div> 
+                </div>
             )
         );
     }
 }
- 
+
 export default Apparatuses;

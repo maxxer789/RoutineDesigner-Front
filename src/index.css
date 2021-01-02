@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.apparatusButton{
+  width: 300px;
+  justify-content: space-between;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(61, 59, 59);
+}
+
+.apparatus{
+  background-color: rgb(100, 100, 100);
+}
+
+
+.abb{
+  color: white;
+  background-color: grey;
+}
