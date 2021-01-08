@@ -17,13 +17,9 @@ import React, { Component } from 'react';
     }
 }*/
 
-const showMessage = id =>{
-    const url = 
-}
-
 const Apparatus = props => {
     return (
-        <button onClick={() => showMessage(props.apparatus.id)} className="apparatusButton">
+        <button onClick={props.inputHandler} name="apparatusId" className="apparatusButton" value={props.apparatus.id}>
             <div className="apparatus">
                 <div className={'apparatus ${props.name}'}>
                     {props.apparatus.name}
