@@ -17,7 +17,6 @@ class SkillGroups extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props);
         this.setState({ apparatusId: this.props.match.params.apparatusId }, async () => {
             const url = `http://localhost:5000/api/Apparatus/${this.state.apparatusId}/skillGroups`
             await fetch(url)

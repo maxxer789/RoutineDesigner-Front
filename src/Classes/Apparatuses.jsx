@@ -24,8 +24,7 @@ class Apparatuses extends Component {
         const url = "http://localhost:5000/api/apparatus/all";
         await fetch(url)
             .then(res => res.json())
-            .then(json => {
-                console.log(json);
+            .then(json => { 
                 this.setState({
                     loading: false,
                     apparatuses: json

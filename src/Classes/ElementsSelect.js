@@ -16,13 +16,11 @@ class ElementsSelect extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props);
         this.setState({ skillGroupId: this.props.match.params.skillGroupId }, async () => {
             const url = `http://localhost:5000/api/skillGroup/${this.state.skillGroupId}/elements`;
             await fetch(url)
                 .then(res => res.json())
                 .then(json => {
-                    console.log(json);
                     this.setState({
                         loading: false,
                         elements: json.elements
