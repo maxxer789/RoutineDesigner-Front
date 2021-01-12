@@ -1,9 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import { render } from '@testing-library/react';
 import App from './App';
+import Apparatuses from './Classes/Apparatuses'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+it("renders correctly", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<Apparatuses></Apparatuses>, div)
+})

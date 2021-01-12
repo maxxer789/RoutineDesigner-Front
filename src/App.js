@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import * as signalR from "@aspnet/signalr";
-import { render } from '@testing-library/react';
 import Apparatuses from './Classes/Apparatuses';
 import Routine from './Classes/Routine';
+import SkillGroups from './Classes/SkillGroups';
+import ElementsSelect from './Classes/ElementsSelect'
 
 class App extends Component {
     render() {
@@ -14,7 +14,9 @@ class App extends Component {
                     <Switch>
                     <Route path="/" exact component={Apparatuses} />
                     <Route path="/Apparatuses" component={Apparatuses} />
-                    <Route path="/Routine" component={Routine}/>
+                    <Route path="/Routine/:routineId" component={Routine}/>
+                    <Route path="/SkillGroups/:routineId/:apparatusId" component={SkillGroups}/>
+                    <Route path="/Elements/:routineId/:skillGroupId" component={ElementsSelect}/>
                     </Switch>
                 </div>
             </Router>
