@@ -1,33 +1,32 @@
-import React,{ useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as signalR from "@microsoft/signalr"
-import { render } from '@testing-library/react';
 
-const Notification: React.FC = () =>{
+const Notification: React.FC = () => {
 
-        const hubConnection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5000/notification").build();
+    const hubConnection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5000/notification").build();
 
-        hubConnection.start();
+    hubConnection.start();
 
-        var list: string[] = [];
+    var list: string[] = [];
 
-        interface NotificationProps {
-            HubConnection: signalR.HubConnection
-        }
-        
-        const Notifications: React.FC<NotificationProps> = (notProps) => {
-            const [date, setDate] = useState<Date>();
+    interface NotificationProps {
+        HubConnection: signalR.HubConnection
+    }
 
-            useEffect(() => {
-                notProps.HubConnection.on("sendToReact", notification => {
-                    list.push(notification);
-                    setDate(new Date());
-                })
-            }, []);
+    const Notifications: React.FC<NotificationProps> = (notProps) => {
+        const [date, setDate] = useState<Date>();
 
-            return <>{list.map((notification, index) => <p key={`notification${index}`}>{notification}</p>)}</>
+        useEffect(() => {
+            notProps.HubConnection.on("sendToReact", notification => {
+                list.push(notification);
+                setDate(new Date());
+            })
+        }, []);
 
-        }
-        return <Notifications HubConnection={hubConnection} />
+        return <>{list.map((notification, index) => <p key={`notification${index}`}>{notification}</p>)}</>
+
+    }
+    return <Notifications HubConnection={hubConnection} />
 }
 
 export default Notification;
