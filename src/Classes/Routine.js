@@ -93,7 +93,7 @@ class Routine extends Component {
                                 ))}
                             </tbody>
                         </table>
-                        <button type="submit" onClick={this.goToSelectSkillGroup}> Add element </button>
+                        <button type="submit" role="addElementButton" onClick={this.goToSelectSkillGroup}> Add element </button>
                     </div>
                 </div>
             )
