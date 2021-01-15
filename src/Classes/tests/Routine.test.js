@@ -1,34 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {withRouter} from 'react-router'
-import '@testing-library/jest-dom/extend-expect'
+import React from 'react';
+import { cleanup, render, screen } from '@testing-library/react'
 import Routine from './../Routine'
-import {render, cleanup, screen, getByTestId} from '@testing-library/react'
-import renderer from "react-test-renderer"
-import { act } from 'react-dom/test-utils'
 
-const props ={
-    routineId: 12
-}
-
-globalThis.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve({
-        routineId: 12,
-        routineName: "Routine 12"
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        json: () => Promise.resolve({ name: "Routine 1", apparatus: { id: 1, name: "apparatus 1", abbreviation:"ap"}, worth: 1.2, elements:[{}], skillLevel:{id: 1, division:"division 1", ageGroup:"ageGroup 1"} }),
     })
-}))
-
-const Router = withRouter(({location}) =>(
-    <div data-testid="routine-display">{location.pathname} </div>
-))
-
-jest.mock('react-router', () =>({
-    withRouter: jest.fn(Comp => props => <Comp {...props} />)
-}))
+)
 
 afterEach(cleanup);
 
-it('displays routine', () => {
-    const {getByTestId} = render(<Routine />)
-    expect(getByTestId('router-display')).toHaveTextContent('')
+
+it("renders without crashing", async () => {
+    render(
+        <Routine />
+    );
+    await screen.findByText("Routine 1");
+    expect(screen.getByRole("routine")).toBeInTheDocument();
 })

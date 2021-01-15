@@ -10,25 +10,40 @@ class SkillGroups extends Component {
             apparatusId: null,
             selectedSkillGroup: {},
             skillGroups: [{}],
-            apparatus: {}
         }
 
         this.handleInput = this.handleInput.bind(this);
     }
 
     async componentDidMount() {
-        this.setState({ apparatusId: this.props.match.params.apparatusId }, async () => {
-            const url = `http://localhost:5000/api/Apparatus/${this.state.apparatusId}/skillGroups`
+        if (this.props.match) 
+        {
+            this.setState({ apparatusId: this.props.match.params.apparatusId }, async () => 
+            {
+                const url = `http://localhost:5000/api/Apparatus/${this.state.apparatusId}/skillGroups`
+
+                await fetch(url)
+                    .then(res => res.json())
+                    .then(json => {
+                        this.setState({
+                            loading: false,
+                            skillGroups: json.skillGroups,
+                        });
+                    })
+            });
+        }
+        else 
+        {
+            const url = `http://localhost:5000/api/Apparatus/1/skillGroups`
             await fetch(url)
                 .then(res => res.json())
                 .then(json => {
                     this.setState({
                         loading: false,
                         skillGroups: json.skillGroups,
-                        apparatus: json.apparatus
                     });
                 })
-        });
+        }
     }
 
     handleSubmit = (event) => {
@@ -52,7 +67,7 @@ class SkillGroups extends Component {
             (
                 <div>Loading...</div>
             ) : (
-                <div>
+                <div role="skillGroups">
                     <h2>Select a skill group to choose a new element from</h2>
                     <form onSubmit={this.handleSubmit}>
                         <div>

@@ -24,7 +24,7 @@ class Apparatuses extends Component {
         const url = "http://localhost:5000/api/apparatus/all";
         await fetch(url)
             .then(res => res.json())
-            .then(json => { 
+            .then(json => {
                 this.setState({
                     loading: false,
                     apparatuses: json
@@ -69,17 +69,20 @@ class Apparatuses extends Component {
     render() {
         return (this.state.loading || !this.state.apparatuses ?
             (
-                <div>Loading...</div>
+                <div role="loading">Loading...</div>
             ) : (
-                <form onSubmit={this.handleSubmit}>
-                    <div><input required minLength="5" type="text" placeholder="Routine Name" name="routineName" onChange={this.handleInputChange} /></div>
-                    <div>
-                        {this.state.apparatuses.map(apparatus => (
-                            <Apparatus inputHandler={this.handleInputChange} key={apparatus.id} apparatus={apparatus} />
-                        ))}
-                    </div>
-                    <button type="submit">Create Routine</button>
-                </form>
+                <div role="apparatuses">
+                    <h2>Create routine</h2>
+                    <form onSubmit={this.handleSubmit}>
+                        <div><input required minLength="5" type="text" role="textbox" placeholder="Routine Name" name="routineName" onChange={this.handleInputChange} /></div>
+                        <div>
+                            {this.state.apparatuses.map(apparatus => (
+                                <Apparatus role="apparatus" inputHandler={this.handleInputChange} key={apparatus.id} apparatus={apparatus} />
+                            ))}
+                        </div>
+                        <button role="button" type="submit">Create Routine</button>
+                    </form>
+                </div>
             )
         );
     }
