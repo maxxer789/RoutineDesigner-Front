@@ -37,4 +37,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: maxvddussen/gymnasticroutine
         tags: latest
+
+    - name: pull image
       run: docker pull maxvddussen/gymnasticroutine:latest
